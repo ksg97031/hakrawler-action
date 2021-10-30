@@ -1,0 +1,33 @@
+name: "hackrawler Action"
+description: "hackrawler is a fast web crawler designed for easy, quick discovery of endpoints and assets within a web application."
+branding:
+  icon: "activity"
+  color: "blue"
+
+inputs:
+  domain:
+    description: "Fast golang web crawler for gathering URLs and JavaSript file locations."
+    required: true
+    default: ""
+
+  list:
+    description: "List of multiple urls"
+    required: false
+    default: ""
+
+  output:
+    description: "File to save output result"
+    required: false
+    default: "hakrawler.log"
+
+  flags:
+    description: "Additional hakrawler CLI flags to use"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        [ ! -z "${{ inputs.list }}" ] && echo "No input file" && exit 1
+        cat ${{ inputs.list }} | /home/runner/go/bin/hakrawler ${{ inputs.flags }} > ${{ inputs.output }}
+      shell: bash
