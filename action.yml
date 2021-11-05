@@ -23,5 +23,5 @@ runs:
   steps:
     - run: |
         GO111MODULE=on go get -v github.com/hakluke/hakrawler@latest
-        cat ${{ inputs.urls }} | /home/runner/go/bin/hakrawler ${{ inputs.flags }} > ${{ inputs.output }}
+        cat ${{ inputs.urls }} | ~/go/bin/hakrawler ${{ inputs.flags }} > ${{ inputs.output }}
       shell: bash
